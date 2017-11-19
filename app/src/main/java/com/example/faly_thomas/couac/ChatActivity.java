@@ -3,6 +3,7 @@ package com.example.faly_thomas.couac;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +13,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChatActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    List<ChatModel> lstChat = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,19 @@ public class ChatActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        setUpMessage();
+        ListView lstView = (ListView)findViewById(R.id.listView);
+        CustomAdapter adapter = new CustomAdapter(lstChat, this);
+        lstView.setAdapter(adapter);
+    }
+
+    private void setUpMessage() {
+        lstChat.add(new ChatModel("Hello !", true));
+        lstChat.add(new ChatModel("Coucou !", false));
+        lstChat.add(new ChatModel("Ouaiis !", true));
+        lstChat.add(new ChatModel("Ouaiiiiiis !", false));
+        lstChat.add(new ChatModel("Ouaiiiiiis !2", false));
     }
 
     @Override
